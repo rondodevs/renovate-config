@@ -28,6 +28,11 @@ module.exports = {
 
   packageRules: [
     {
+      description: 'Our own plugins installed from local path repositories (not on Packagist)',
+      matchPackageNames: ['plcdnl/*'],
+      enabled: false,
+    },
+    {
       description: 'One weekly PR with all minor/patch updates (Craft + plugins)',
       matchUpdateTypes: ['minor', 'patch'],
       groupName: 'Craft and plugins (minor/patch)',
