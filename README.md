@@ -13,9 +13,8 @@ from this repo. Nothing is committed to the projects themselves.
 - [`config.js`](config.js) holds all the rules.
 - [`.github/workflows/renovate.yml`](.github/workflows/renovate.yml) runs it
   every day at 05:00 UTC (and on demand via *Run workflow*).
-- Repos are picked by GitHub topic: every repo the token can access with the
-  topic **`renovate`** is processed. Add or remove the topic to opt a project
-  in or out.
+- Repos are picked by GitHub topic: every `rondodevs/*` repo with the topic
+  **`renovate`** is processed. Add or remove the topic to opt a project in or out.
 
 Rules:
 

@@ -1,12 +1,13 @@
 // Self-hosted Renovate config for rondodevs' own Craft CMS projects
 // (the ones built on ghcr.io/rondodevs/craft-php). Not meant for general use.
 //
-// Which repos: every repo the token can access that has the GitHub topic
-// "renovate". Add/remove the topic on a repo to opt it in/out — nothing is
-// committed to the projects themselves.
+// Which repos: rondodevs repos with the GitHub topic "renovate". Add/remove
+// the topic on a repo to opt it in/out — nothing is committed to the
+// projects themselves.
 module.exports = {
   platform: 'github',
   autodiscover: true,
+  autodiscoverFilter: ['rondodevs/*'],
   autodiscoverTopics: ['renovate'],
   onboarding: false,
   requireConfig: 'optional',
