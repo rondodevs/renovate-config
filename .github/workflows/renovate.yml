@@ -1,0 +1,44 @@
+name: Renovate
+
+on:
+  # Daily, so security fixes land any day; regular updates are limited to
+  # Monday morning by the schedule in config.js.
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        description: "Dry run (log what would happen, open no PRs)"
+        type: boolean
+        default: false
+
+concurrency: renovate
+
+permissions:
+  contents: read
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Renovate
+        if: ${{ !inputs.dryRun }}
+        uses: renovatebot/github-action@v46
+        with:
+          configurationFile: config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          # Actions logs of a public repo are public: keep them quiet.
+          LOG_LEVEL: warn
+
+      - name: Renovate (dry run)
+        if: ${{ inputs.dryRun }}
+        uses: renovatebot/github-action@v46
+        with:
+          configurationFile: config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          LOG_LEVEL: info
+          RENOVATE_DRY_RUN: full
