@@ -1,4 +1,4 @@
-// Self-hosted Renovate config for plcd.nl's own Craft CMS projects
+// Self-hosted Renovate config for rondodevs' own Craft CMS projects
 // (the ones built on ghcr.io/rondodevs/craft-php). Not meant for general use.
 //
 // Which repos: every repo the token can access that has the GitHub topic

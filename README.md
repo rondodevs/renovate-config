@@ -1,7 +1,7 @@
 # renovate-config
 
 > **This is NOT a general-purpose Renovate preset.** It only serves
-> [plcd.nl](https://plcd.nl)'s own Craft CMS projects built on
+> [rondodevs](https://github.com/rondodevs)' own Craft CMS projects built on
 > [`craft-php`](https://github.com/rondodevs/craft-php). It is public only so
 > it can run from a single place; don't extend it or rely on it in your projects.
 
