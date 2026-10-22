@@ -37,7 +37,7 @@ Rules:
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>rondodevs/renovate-config:nuxt"]
+  "extends": ["github>rondodevs/renovate-config:nuxt.json5"]
 }
 ```
 

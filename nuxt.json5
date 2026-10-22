@@ -1,6 +1,6 @@
 // Preset for rondodevs' Nuxt projects (nuxt-layers and the *-frontend sites).
 // Use it from the project's renovate.json:
-//   { "extends": ["github>rondodevs/renovate-config:nuxt"] }
+//   { "extends": ["github>rondodevs/renovate-config:nuxt.json5"] }
 // and add the "renovate" topic to the repo. Schedule, timezone, major approval
 // and lock file maintenance timing come from config.js.
 {
