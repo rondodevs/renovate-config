@@ -21,15 +21,31 @@ own `renovate.json` to override the defaults below.
 Rules:
 
 - Composer only by default (Craft CMS and plugins); PHP itself comes from the base image.
-  nuxt-layers overrides this in its `renovate.json`: npm + GitHub Actions, grouped by
-  Nuxt/ESLint/UnoCSS, patch automerge. A repo that defines its own groups must also set
-  `groupSlug`, or they all share the `craft-minor-patch` branch.
+  Nuxt projects use the [`nuxt`](#nuxt-projects) preset instead.
 - Monday morning: one PR per project grouping all minor/patch updates.
 - Security fixes: a separate PR as soon as an advisory is published.
 - Major updates (e.g. Craft 5 → 6): never automatic, approve them from the
   Dependency Dashboard issue in each project.
 - First day of the month: lock file maintenance (refreshes transitive deps).
 - Only `composer.lock` is updated; version ranges in `composer.json` stay as they are.
+
+## Nuxt projects
+
+[`nuxt.json5`](nuxt.json5) is a preset for nuxt-layers and the `*-frontend` sites. Add the
+`renovate` topic to the repo and commit this `renovate.json`:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>rondodevs/renovate-config:nuxt"]
+}
+```
+
+On top of the rules above it enables npm + GitHub Actions, keeps separate PRs for
+Nuxt (with Vue and Nuxt modules), ESLint and GitHub Actions, skips releases younger
+than 3 days and merges patch updates and lock file maintenance once CI passes. Without
+CI in the repo those merge right away. Groups in a repo's own config need a `groupSlug`
+too, or they share the `craft-minor-patch` branch set by `config.js`.
 
 ## Setup
 

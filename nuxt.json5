@@ -1,0 +1,49 @@
+// Preset for rondodevs' Nuxt projects (nuxt-layers and the *-frontend sites).
+// Use it from the project's renovate.json:
+//   { "extends": ["github>rondodevs/renovate-config:nuxt"] }
+// and add the "renovate" topic to the repo. Schedule, timezone, major approval
+// and lock file maintenance timing come from config.js.
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+
+  // config.js enables Composer only.
+  enabledManagers: ['npm', 'github-actions'],
+
+  // Skip releases younger than 3 days (yanked or compromised versions).
+  minimumReleaseAge: '3 days',
+
+  lockFileMaintenance: { automerge: true },
+
+  // Every group needs its own groupSlug: config.js sets "craft-minor-patch"
+  // on all minor/patch updates, so without one they'd share that branch.
+  packageRules: [
+    {
+      description: 'One weekly PR with all minor/patch updates not grouped below',
+      matchUpdateTypes: ['minor', 'patch'],
+      groupName: 'minor and patch',
+      groupSlug: 'minor-patch',
+    },
+    {
+      groupName: 'nuxt',
+      groupSlug: 'nuxt',
+      matchPackageNames: ['nuxt', '@nuxt/**', '@nuxtjs/**', 'nuxt-**', 'vue', 'vue-router', '@unhead/**'],
+    },
+    {
+      groupName: 'eslint',
+      groupSlug: 'eslint',
+      matchPackageNames: ['eslint', '@antfu/eslint-config', '@graphql-eslint/**', '@unocss/eslint-plugin', 'eslint-plugin-**'],
+    },
+    {
+      groupName: 'github actions',
+      groupSlug: 'github-actions',
+      matchManagers: ['github-actions'],
+    },
+    {
+      // Renovate waits for the repo's checks: a repo without CI gets these merged right away.
+      description: 'Patch updates of stable packages merge on their own once CI passes',
+      matchUpdateTypes: ['patch'],
+      matchCurrentVersion: '!/^0/',
+      automerge: true,
+    },
+  ],
+}
