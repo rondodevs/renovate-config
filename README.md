@@ -1,12 +1,14 @@
 # renovate-config
 
 > **This is NOT a general-purpose Renovate preset.** It only serves
-> [rondodevs](https://github.com/rondodevs)' own Craft CMS projects built on
-> [`craft-php`](https://github.com/rondodevs/craft-php). It is public only so
+> [rondodevs](https://github.com/rondodevs)' own projects: the Craft CMS sites built on
+> [`craft-php`](https://github.com/rondodevs/craft-php) and
+> [`nuxt-layers`](https://github.com/rondodevs/nuxt-layers). It is public only so
 > it can run from a single place; don't extend it or rely on it in your projects.
 
 Self-hosted [Renovate](https://docs.renovatebot.com), run by GitHub Actions
-from this repo. Nothing is committed to the projects themselves.
+from this repo. The Craft projects need nothing committed; a repo can add its
+own `renovate.json` to override the defaults below.
 
 ## How it works
 
@@ -18,7 +20,10 @@ from this repo. Nothing is committed to the projects themselves.
 
 Rules:
 
-- Composer only (Craft CMS and plugins); PHP itself comes from the base image.
+- Composer only by default (Craft CMS and plugins); PHP itself comes from the base image.
+  nuxt-layers overrides this in its `renovate.json`: npm + GitHub Actions, grouped by
+  Nuxt/ESLint/UnoCSS, patch automerge. A repo that defines its own groups must also set
+  `groupSlug`, or they all share the `craft-minor-patch` branch.
 - Monday morning: one PR per project grouping all minor/patch updates.
 - Security fixes: a separate PR as soon as an advisory is published.
 - Major updates (e.g. Craft 5 → 6): never automatic, approve them from the

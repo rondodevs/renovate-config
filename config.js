@@ -1,9 +1,10 @@
-// Self-hosted Renovate config for rondodevs' own Craft CMS projects
-// (the ones built on ghcr.io/rondodevs/craft-php). Not meant for general use.
+// Self-hosted Renovate config for rondodevs' own projects: the Craft CMS sites
+// built on ghcr.io/rondodevs/craft-php, plus nuxt-layers. Not meant for general use.
 //
 // Which repos: rondodevs repos with the GitHub topic "renovate". Add/remove
-// the topic on a repo to opt it in/out — nothing is committed to the
-// projects themselves.
+// the topic on a repo to opt it in/out — the Craft projects need nothing
+// committed. The defaults below are for them (Composer only); a repo can
+// change them in its own renovate.json (nuxt-layers enables npm + GitHub Actions).
 module.exports = {
   platform: 'github',
   autodiscover: true,
@@ -16,8 +17,9 @@ module.exports = {
   extends: ['config:recommended', ':dependencyDashboard'],
   timezone: 'Europe/Rome',
 
-  // Composer only (Craft CMS and plugins): PHP and system packages come
-  // from the craft-php base image, which rebuilds weekly.
+  // Default: Composer only (Craft CMS and plugins). PHP and system packages come
+  // from the craft-php base image, which rebuilds weekly. Repos that need other
+  // managers set enabledManagers in their own renovate.json.
   enabledManagers: ['composer'],
   // Update composer.lock only; version ranges in composer.json stay as they are.
   rangeStrategy: 'update-lockfile',
