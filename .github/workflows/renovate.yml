@@ -1,10 +1,12 @@
 name: Renovate
 
 on:
-  # Daily, so security fixes land any day; regular updates are limited to
-  # Monday morning by the schedule in config.js.
+  # Twice a day (cron is UTC: 08:00/16:00 Rome in summer, 07:00/15:00 in
+  # winter, so the Monday run stays inside "before 9am" year-round), so
+  # security fixes and Dependency Dashboard requests land the same day;
+  # regular updates are limited to Monday morning by the schedule in config.js.
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "0 6,14 * * *"
   workflow_dispatch:
     inputs:
       dryRun:
